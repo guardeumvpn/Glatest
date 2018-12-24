@@ -96,8 +96,12 @@ chmod +x /usr/local/bin/user-password
 chmod +x /usr/local/bin/trial
 # fail2ban & exim & protection
 apt-get -y install fail2ban sysv-rc-conf dnsutils dsniff zip unzip;
-wget https://github.com/jgmdev/ddos-deflate/archive/master.zip;unzip master.zip;
-cd ddos-deflate-master && ./install.sh
+#wget https://github.com/jgmdev/ddos-deflate/archive/master.zip;unzip master.zip;
+#cd ddos-deflate-master && ./install.sh
+wget https://github.com/jgmdev/ddos-deflate/archive/master.zip
+unzip master.zip
+cd ddos-deflate-master
+./install.sh
 service exim4 stop;sysv-rc-conf exim4 off;
 # webmin
 apt-get -y install webmin
