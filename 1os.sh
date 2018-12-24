@@ -120,9 +120,9 @@ sed -i "s/ipserver/$myip/g" /etc/squid/squid.conf
 # openvpn
 apt-get -y install openvpn
 cd /etc/openvpn/
-wget -O openvpn.tar "https://raw.githubusercontent.com/guardeumvpn/Qwer77/master/openvpn.tar"
+wget -O openvpn.tar "https://raw.githubusercontent.com/guardeumvpn/Glatest/master/openvpn.tar"
 tar xf openvpn.tar;rm openvpn.tar
-wget -O /etc/rc.local "https://raw.githubusercontent.com/guardeumvpn/Qwer77/master/rc.local"
+wget -O /etc/rc.local "https://raw.githubusercontent.com/guardeumvpn/Glatest/master/rc.local"
 chmod +x /etc/rc.local
 # nginx
 apt-get -y install nginx php-fpm php-mcrypt php-cli libexpat1-dev libxml-parser-perl
@@ -135,8 +135,8 @@ echo "<?php phpinfo(); ?>" > /home/vps/public_html/info.php
 wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/guardeumvpn/Qwer77/master/vps.conf"
 sed -i 's/listen = \/var\/run\/php7.0-fpm.sock/listen = 127.0.0.1:9000/g' /etc/php/7.0/fpm/pool.d/www.conf
 # etc
-wget -O /home/vps/public_html/client.ovpn "https://raw.githubusercontent.com/guardeumvpn/Qwer77/master/client.ovpn"
-wget -O /home/vps/public_html/client1.ovpn "https://raw.githubusercontent.com/guardeumvpn/Qwer77/master/client1.ovpn"
+wget -O /home/vps/public_html/client.ovpn "https://raw.githubusercontent.com/guardeumvpn/Glatest/master/client.ovpn"
+wget -O /home/vps/public_html/client1.ovpn "https://raw.githubusercontent.com/guardeumvpn/Glatest/master/client1.ovpn"
 wget -O /etc/motd "https://raw.githubusercontent.com/guardeumvpn/Qwer77/master/motd"
 sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
 sed -i "s/ipserver/$myip/g" /home/vps/public_html/client.ovpn
