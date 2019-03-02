@@ -134,10 +134,13 @@ wget -O /etc/squid/squid.conf "https://raw.githubusercontent.com/guardeumvpn/Qwe
 #sed -i "s/ipserver/$myip/g" /etc/squid3/squid.conf
 sed -i "s/ipserver/$myip/g" /etc/squid/squid.conf
 # openvpn
-apt-get -y install openvpn
-cd /etc/openvpn/
-wget -O openvpn.tar "https://raw.githubusercontent.com/guardeumvpn/Glatest/master/openvpn.tar"
-tar xf openvpn.tar;rm openvpn.tar
+curl -O https://raw.githubusercontent.com/Angristan/openvpn-install/master/openvpn-install.sh
+chmod +x openvpn-install.sh
+./openvpn-install.sh
+#apt-get -y install openvpn
+#cd /etc/openvpn/
+#wget -O openvpn.tar "https://raw.githubusercontent.com/guardeumvpn/Glatest/master/openvpn.tar"
+#tar xf openvpn.tar;rm openvpn.tar
 cd
 wget -O /etc/rc.local "https://raw.githubusercontent.com/guardeumvpn/Glatest/master/rc.local"
 chmod +x /etc/rc.local
@@ -151,13 +154,15 @@ echo "<pre>Setup By DISASTERMASTER → Call, Whatsapp, Telegram : @guardeumvpn <
 echo "<?php phpinfo(); ?>" > /home/vps/public_html/info.php
 wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/guardeumvpn/Qwer77/master/vps.conf"
 sed -i 's/listen = \/var\/run\/php7.0-fpm.sock/listen = 127.0.0.1:9000/g' /etc/php/7.0/fpm/pool.d/www.conf
+
 # etc
-wget -O /home/vps/public_html/client.ovpn "https://raw.githubusercontent.com/guardeumvpn/Glatest/master/client.ovpn"
-wget -O /home/vps/public_html/client1.ovpn "https://raw.githubusercontent.com/guardeumvpn/Glatest/master/client1.ovpn"
+cp /root/client.ovpn /home/vps/public_html
+#wget -O /home/vps/public_html/client.ovpn "https://raw.githubusercontent.com/guardeumvpn/Glatest/master/client.ovpn"
+#wget -O /home/vps/public_html/client1.ovpn "https://raw.githubusercontent.com/guardeumvpn/Glatest/master/client1.ovpn"
 wget -O /etc/motd "https://raw.githubusercontent.com/guardeumvpn/Qwer77/master/motd"
 sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
-sed -i "s/ipserver/$myip/g" /home/vps/public_html/client.ovpn
-sed -i "s/ipserver/$myip/g" /home/vps/public_html/client1.ovpn
+#sed -i "s/ipserver/$myip/g" /home/vps/public_html/client.ovpn
+#sed -i "s/ipserver/$myip/g" /home/vps/public_html/client1.ovpn
 #useradd -m -g users -s /bin/bash test
 #echo "test:test" | chpasswd
 echo "UPDATE AND INSTALL COMPLETE COMPLETE 99% BE PATIENT"
