@@ -5,10 +5,14 @@
 # Developer: Disastermaster
 # Nickname: DM
 # Date: 01-01-2018
-# Last Updated: 26-01-2018
+# Last Updated: 01-06-2019
 # ******************************************
+
+
 # START SCRIPT ( guardeumvpn.tk )
 myip="$(dig +short myip.opendns.com @resolver1.opendns.com)";
+
+
 #echo "My WAN/Public IP address: ${myip}"
 #myip=`ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0' | head -n1`;
 myint=`ifconfig | grep -B1 "inet addr:$myip" | head -n1 | awk '{print $1}'`;
@@ -24,6 +28,8 @@ if [[ ! -e /dev/net/tun ]]; then
 echo "TUN is not available"
 exit 3
 fi
+
+
 echo "
 AUTOSCRIPT BY DISASTERMASTER
 
@@ -96,40 +102,60 @@ chmod +x /usr/local/bin/user-lock
 chmod +x /usr/local/bin/auto-reboot
 chmod +x /usr/local/bin/user-password
 chmod +x /usr/local/bin/trial
+
+
 # fail2ban & exim & protection
 apt-get -y install fail2ban sysv-rc-conf dnsutils dsniff zip unzip;
 #wget https://github.com/jgmdev/ddos-deflate/archive/master.zip;unzip master.zip;
 #cd ddos-deflate-master && ./install.sh
-wget https://github.com/jgmdev/ddos-deflate/archive/master.zip
-unzip master.zip
+wget https://github.com/jgmdev/ddos-deflate/archive/master.zip -O ddos.zip
+unzip ddos.zip
 cd ddos-deflate-master
 ./install.sh
 service exim4 stop;sysv-rc-conf exim4 off;
+
+
 # webmin
 apt-get -y install webmin
 sed -i 's/ssl=1/ssl=0/g' /etc/webmin/miniserv.conf
+
+
 # ssh
 sed -i 's/#Banner/Banner/g' /etc/ssh/sshd_config
 sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
 wget -O /etc/issue.net "https://raw.githubusercontent.com/guardeumvpn/Qwer77/master/banner"
+
+
 # dropbear
 apt-get -y install dropbear
 wget -O /etc/default/dropbear "https://raw.githubusercontent.com/guardeumvpn/Qwer77/master/dropbear"
 echo "/bin/false" >> /etc/shells
 echo "/usr/sbin/nologin" >> /etc/shells
+
+
 # squid3
 apt-get -y install squid3
+#apt-get -y install squid
 wget -O /etc/squid3/squid.conf "https://raw.githubusercontent.com/guardeumvpn/Qwer77/master/squid.conf"
 wget -O /etc/squid/squid.conf "https://raw.githubusercontent.com/guardeumvpn/Qwer77/master/squid.conf"
 sed -i "s/ipserver/$myip/g" /etc/squid3/squid.conf
 sed -i "s/ipserver/$myip/g" /etc/squid/squid.conf
+
+
 # openvpn
-apt-get -y install openvpn
-cd /etc/openvpn/
-wget -O openvpn.tar "https://raw.githubusercontent.com/guardeumvpn/Glatest/master/openvpn.tar"
-tar xf openvpn.tar;rm openvpn.tar
-wget -O /etc/rc.local "https://raw.githubusercontent.com/guardeumvpn/Glatest/master/rc.local"
-chmod +x /etc/rc.local
+curl -O https://raw.githubusercontent.com/Angristan/openvpn-install/master/openvpn-install.sh
+chmod +x openvpn-install.sh
+./openvpn-install.sh
+
+# openvpn
+#apt-get -y install openvpn
+#cd /etc/openvpn/
+#wget -O openvpn.tar "https://raw.githubusercontent.com/guardeumvpn/Glatest/master/openvpn.tar"
+#tar xf openvpn.tar;rm openvpn.tar
+#wget -O /etc/rc.local "https://raw.githubusercontent.com/guardeumvpn/Glatest/master/rc.local"
+#chmod +x /etc/rc.local
+
+
 # nginx
 apt-get -y install nginx php-fpm php-mcrypt php-cli libexpat1-dev libxml-parser-perl
 rm /etc/nginx/sites-enabled/default
@@ -140,18 +166,22 @@ echo "<pre>Setup By DISASTERMASTER → Call, Whatsapp, Telegram : @guardeumvpn <
 echo "<?php phpinfo(); ?>" > /home/vps/public_html/info.php
 wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/guardeumvpn/Qwer77/master/vps.conf"
 sed -i 's/listen = \/var\/run\/php7.0-fpm.sock/listen = 127.0.0.1:9000/g' /etc/php/7.0/fpm/pool.d/www.conf
+
+
 # etc
-wget -O /home/vps/public_html/client.ovpn "https://raw.githubusercontent.com/guardeumvpn/Glatest/master/client.ovpn"
-wget -O /home/vps/public_html/client1.ovpn "https://raw.githubusercontent.com/guardeumvpn/Glatest/master/client1.ovpn"
+#wget -O /home/vps/public_html/client.ovpn "https://raw.githubusercontent.com/guardeumvpn/Glatest/master/client.ovpn"
+#wget -O /home/vps/public_html/client1.ovpn "https://raw.githubusercontent.com/guardeumvpn/Glatest/master/client1.ovpn"
 wget -O /etc/motd "https://raw.githubusercontent.com/guardeumvpn/Qwer77/master/motd"
 sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
-sed -i "s/ipserver/$myip/g" /home/vps/public_html/client.ovpn
-sed -i "s/ipserver/$myip/g" /home/vps/public_html/client1.ovpn
+#sed -i "s/ipserver/$myip/g" /home/vps/public_html/client.ovpn
+#sed -i "s/ipserver/$myip/g" /home/vps/public_html/client1.ovpn
 #useradd -m -g users -s /bin/bash test
 #echo "test:test" | chpasswd
 echo "UPDATE AND INSTALL COMPLETE COMPLETE 99% BE PATIENT"
 rm *.sh;rm *.txt;rm *.tar;rm *.deb;rm *.asc;rm *.zip;rm ddos*;
 clear
+
+
 # restart service
 service ssh restart
 service openvpn restart
@@ -163,6 +193,8 @@ service squid3 restart
 service squid restart
 service fail2ban restart
 clear
+
+
 # END SCRIPT ( guardeumvpn.tk )
 echo "========================================"  | tee -a log-install.txt
 echo "Service Autoscript VPS (guardeumvpn.ml)"  | tee -a log-install.txt
