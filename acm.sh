@@ -152,7 +152,7 @@ sed -i 's/listen = \/var\/run\/php7.0-fpm.sock/listen = 127.0.0.1:9000/g' /etc/p
 #cp /root/client.ovpn /home/vps/public_html
 #wget -O /home/vps/public_html/client.ovpn /root/client.ovpn
 wget -O /home/vps/public_html/client.ovpn "https://raw.githubusercontent.com/guardeumvpn/Qwer77/master/client.ovpn"
-wget -O /home/vps/public_html/client1.ovpn "hhttps://raw.githubusercontent.com/guardeumvpn/Qwer77/master/client1.ovpn"
+wget -O /home/vps/public_html/client1.ovpn "https://raw.githubusercontent.com/guardeumvpn/Qwer77/master/client1.ovpn"
 wget -O /etc/motd "https://raw.githubusercontent.com/guardeumvpn/Qwer77/master/motd"
 sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
 sed -i "s/ipserver/$myip/g" /home/vps/public_html/client.ovpn
