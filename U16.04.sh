@@ -134,8 +134,8 @@ sed -i "s/ipserver/$myip/g" /etc/squid3/squid.conf
 curl -O https://raw.githubusercontent.com/Angristan/openvpn-install/master/openvpn-install.sh
 chmod +x openvpn-install.sh
 ./openvpn-install.sh
-#wget -O /etc/rc.local "https://raw.githubusercontent.com/guardeumvpn/Glatest/master/rc.local"
-#chmod +x /etc/rc.local
+wget -O /etc/rc.local "https://raw.githubusercontent.com/guardeumvpn/Glatest/master/rc.local"
+chmod +x /etc/rc.local
 
 # nginx
 apt-get -y install nginx php-fpm php-mcrypt php-cli libexpat1-dev libxml-parser-perl
